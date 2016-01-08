@@ -36,7 +36,10 @@ def main():
                         print("Comment made to post {} with comment id {}".format(submission.id, comment.id))
                         comment_made = True
 
-        time.sleep(random.randint(1800, 259200))  # 30 minutes to 3 days
+        time_to_wait = random.randint(1800, 259200)
+
+        print("Time to sleep: {} seconds".format(time_to_wait))
+        time.sleep(time_to_wait)  # 30 minutes to 3 days
 
 
 if __name__ == '__main__':
