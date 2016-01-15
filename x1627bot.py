@@ -1,9 +1,15 @@
+"""
+[x1627]()
+"""
+
 import time
 import praw
 import random
 import pykcd
+import logging
 
 from requests import HTTPError
+from helper import user, password
 
 words_to_monitor = ['fake', 'no way']
 what_to_say = [
@@ -85,7 +91,7 @@ def whoosh(r: praw.Reddit):
                 continue
             break
 
-        except AttributeError as e:
+        except (AttributeError, praw.errors.APIException) as e:
             print("Error encountered:")
             print(e)
             print("Moving onto next sub")
@@ -95,7 +101,7 @@ def main():
     r = praw.Reddit(user_agent='x1627')
 
     print("Logging in....")
-    r.login('username', 'pass', disable_warning=True)
+    r.login(user, password, disable_warning=True)
     print("Success!")
     already_done = set()
     time_to_wait = 0
